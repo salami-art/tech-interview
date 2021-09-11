@@ -16,6 +16,10 @@ Front-end:
 * React Router
 * Yarn
 * Axios
+* Formik (feel free to replace with preferred lib)
+* Yup (for form validation)
+* react-router-dom library for routing
+
 
 ## Task
 
@@ -42,3 +46,4 @@ that you can fetch from the database.
 - Unit tests
 - Documentation (e.g. Swagger, JavaDoc)
 - Search functionality (or filtering)
+- Usage of prop-types
