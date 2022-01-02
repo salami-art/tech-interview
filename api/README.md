@@ -1,6 +1,6 @@
 # User API
 
-created with [https://www.npmjs.com/package/swagger-node-codegen]Swagger Node Codegen
+created with [https://www.npmjs.com/package/swagger-node-codegen] Swagger Node Codegen
 
 User API
 

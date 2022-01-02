@@ -1,49 +1,36 @@
-# Tech interview 
+# User API
 
-## Tech stack
-For the project the following stack provided:
+## Server Side 
 
-Back-end:
-* Spring Boot 
-* Hibernate
-* JPA
-* Lombok
-* H2 database
+cd into the `api` folder
 
-Front-end:
+install dependencies:
 
-* React (With hooks)
-* React Router
-* Yarn
-* Axios
-* Formik (feel free to replace with preferred lib)
-* Yup (for form validation)
-* react-router-dom library for routing
+`V=1 yarn install`
 
+create db and seed data:
 
-## Task
+```
+knex migrate:latest
+knex seed:run
+```
 
-You need to create a page(s), where the user can create users, edit them, select one and delete. You need to create 
-both, front-end and back-end and have this functionality as a functional unit. If you are more focused to front-end
-please make front-end functionality as nice as possible (e.g. cover with tests, make it responsive etc). On the other hand, 
-if you are back-end focused, do the same with Spring (e.g. implement model mappers).
+run project
 
-For easier start, we created user entity and seeded it (using faker) to H2 database, so you already have some users 
-that you can fetch from the database.
+`yarn dev`
 
-- You need to create a table and list all users
-- Add a page, where the user can be created
-- Add a page where the user can be updated
-- Make a button (maybe with alert dialog?) to delete a user
-- Make it possible to view a single user (e.g. modal or another page)
+run tests
 
-### Minimum functionality
+`yarn test`
 
-- Functioning API
-- Usable front-end
+visit API documentation
 
-### Bonus points
-- Unit tests
-- Documentation (e.g. Swagger, JavaDoc)
-- Search functionality (or filtering)
-- Usage of prop-types
+`localhost:3001/api-docs`
+
+## Client
+
+cd into the `webapp` folder
+
+run `yarn start`
+
+visit `http://localhost:3000`
