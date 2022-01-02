@@ -1,0 +1,4 @@
+.invalid-feedback { color: red; font-size: 1.4rem; margin: .3rem 0 0; }
+.error-wrapper {height: 1.7rem;}
+input { width: 100%;}
+input.is-invalid { border: 1px solid red;}

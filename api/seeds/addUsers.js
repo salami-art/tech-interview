@@ -3,7 +3,7 @@ const faker = require('faker');
 const getFakeUser = () => ({
   name: faker.name.firstName(),
   surname: faker.name.lastName(),
-  birth_date: faker.date.past(),
+  birth_date: faker.date.between('1979-01-01', '2001-01-05'),
   email: faker.internet.email(),
   password: faker.internet.password(),
   phone: faker.phone.phoneNumber(),

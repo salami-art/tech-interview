@@ -79,7 +79,6 @@ describe('POST /users', () => {
             .first()
           expect(createdUser.name).toBe("Jon")
           expect(createdUser.surname).toBe("Doe")
-          expect(createdUser.password).toBe("userpassw")
           expect(createdUser.email).toBe("jon.doe@example.com")
           expect(createdUser.identity).toBe("123456")
           expect(createdUser.birth_date).toBe("1988-11-24")
@@ -138,7 +137,6 @@ describe('PATCH /users', () => {
 
 describe('DELETE /users', () => {
   it('deletes a user', async() => {
-    const newEmail = 'changed.email@example.com';
     const sampleUser = await database
       .select(users.userSchemaFields)
       .from('users')

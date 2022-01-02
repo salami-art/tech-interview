@@ -6,7 +6,6 @@ const userSchemaFields = [
   'surname',
   'birth_date',
   'email',
-  'password',
   'phone',
   'identity',
   'passport_number',
@@ -120,7 +119,6 @@ module.exports.deleteUser = async (options) => {
   const deleted = await database('users')
     .where({id: userId})
     .del()
-    console.log(deleted)
   return {
     status: 200,
     data: {deleted}

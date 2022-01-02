@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const config = require('../lib/config');
 const logger = require('../lib/logger');
 const swaggerUi = require('swagger-ui-express');
-
 const log = logger(config.logger);
 const app = express();
+const cors = require('cors');
 
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('apidoc.yml');
@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(cors());
 /*
  * Routes
  */
@@ -27,8 +28,6 @@ app.use((req, res, next) => {
   log.error(`Error 404 on ${req.url}.`);
   res.status(404).send({ status: 404, error: 'Not found' });
 });
-
-
 
 // catch errors
 app.use((err, req, res, next) => {
