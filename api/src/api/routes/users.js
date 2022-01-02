@@ -24,12 +24,10 @@ router.get('/', async (req, res, next) => {
  * Create a user
  */
 router.post('/', async (req, res, next) => {
-  const options = {
-    body: req.body
-  };
+  const {body} = req;
 
   try {
-    const result = await users.createUser(options);
+    const result = await users.createUser(body);
     res.status(result.status || 200).send(result.data);
   } catch (err) {
     next(err);

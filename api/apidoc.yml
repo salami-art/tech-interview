@@ -226,12 +226,11 @@ components:
         - email
         - identity
       example:
-        id: 23
         name: Jon
         surname: Doe
         password: userpassw
         email: jon.doe@example.com
         identity: "123456"
-        birth_date_date: '1988-11-24'
+        birth_date: '1988-11-24'
       xml:
         name: User

@@ -1,30 +1,49 @@
 const ServerError = require('../../lib/error');
+const database = require('./database');
+const userSchemaFields = [
+  'id',
+  'name',
+  'surname',
+  'birth_date',
+  'email',
+  'password',
+  'phone',
+  'identity',
+  'passport_number',
+]
+module.exports.userSchemaFields = userSchemaFields;
+
+const isEmptyValue = (value) => {
+  if (value == null) return true;
+  if (value == undefined) return true;
+  switch (typeof value) {
+    case "string": return !value.trim();
+    case "number": return value == 0;
+    default: return !value
+  }
+}
+
+const userInvalid = (requiredFields, params) => {
+  return requiredFields
+    .filter((k) => isEmptyValue(params[k]) )
+    .map((k) => ({
+        field_name: k,
+        message: `Field ${k} is required`
+      })
+    )
+}
+
 /**
  * @param {Object} options
  * @throws {Error}
  * @return {Promise}
  */
 module.exports.listUsers = async (options) => {
-  // Implement your business logic here...
-  //
-  // This function should return as follows:
-  //
-  // return {
-  //   status: 200, // Or another success code.
-  //   data: [] // Optional. You can put whatever you want here.
-  // };
-  //
-  // If an error happens during your business logic implementation,
-  // you should throw an error as follows:
-  //
-  // throw new ServerError({
-  //   status: 500, // Or another error code.
-  //   error: 'Server Error' // Or another error message.
-  // });
+  const users = await database.select(...userSchemaFields).from('users');
 
   return {
     status: 200,
-    data: 'listUsers ok!'
+    data: { users }
   };
 };
 
@@ -34,26 +53,26 @@ module.exports.listUsers = async (options) => {
  * @return {Promise}
  */
 module.exports.createUser = async (options) => {
-  // Implement your business logic here...
-  //
-  // This function should return as follows:
-  //
-  // return {
-  //   status: 200, // Or another success code.
-  //   data: [] // Optional. You can put whatever you want here.
-  // };
-  //
-  // If an error happens during your business logic implementation,
-  // you should throw an error as follows:
-  //
-  // throw new ServerError({
-  //   status: 500, // Or another error code.
-  //   error: 'Server Error' // Or another error message.
-  // });
+  const userRequiredFields = [
+    'name',
+    'surname',
+    'password',
+    'birth_date',
+    'email',
+    'identity',
+  ]
+
+  const invalid = userInvalid(userRequiredFields, options);
+  if (invalid.length) return {
+    status: 400,
+    data: { invalid }
+  }
+  
+  const user = await database('users').insert(options);
 
   return {
-    status: 200,
-    data: 'createUser ok!'
+    status: 201,
+    data: {user}
   };
 };
 
@@ -64,26 +83,29 @@ module.exports.createUser = async (options) => {
  * @return {Promise}
  */
 module.exports.updateUser = async (options) => {
-  // Implement your business logic here...
-  //
-  // This function should return as follows:
-  //
-  // return {
-  //   status: 200, // Or another success code.
-  //   data: [] // Optional. You can put whatever you want here.
-  // };
-  //
-  // If an error happens during your business logic implementation,
-  // you should throw an error as follows:
-  //
-  // throw new ServerError({
-  //   status: 500, // Or another error code.
-  //   error: 'Server Error' // Or another error message.
-  // });
+  const { userId, body } = options;
+  const userRequiredFields = [
+    'name',
+    'surname',
+    'birth_date',
+    'email',
+    'identity',
+  ]
+
+  const invalid = userInvalid(userRequiredFields, body);
+
+  if (invalid.length) return {
+    status: 400,
+    data: { invalid }
+  }
+  
+  const user = await database('users')
+    .where({id: userId})
+    .update(body)
 
   return {
     status: 200,
-    data: 'updateUser ok!'
+    data: {user}
   };
 };
 
@@ -94,26 +116,14 @@ module.exports.updateUser = async (options) => {
  * @return {Promise}
  */
 module.exports.deleteUser = async (options) => {
-  // Implement your business logic here...
-  //
-  // This function should return as follows:
-  //
-  // return {
-  //   status: 200, // Or another success code.
-  //   data: [] // Optional. You can put whatever you want here.
-  // };
-  //
-  // If an error happens during your business logic implementation,
-  // you should throw an error as follows:
-  //
-  // throw new ServerError({
-  //   status: 500, // Or another error code.
-  //   error: 'Server Error' // Or another error message.
-  // });
-
+  const { userId } = options;
+  const deleted = await database('users')
+    .where({id: userId})
+    .del()
+    console.log(deleted)
   return {
     status: 200,
-    data: 'deleteUser ok!'
+    data: {deleted}
   };
 };
 

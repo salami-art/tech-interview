@@ -28,6 +28,8 @@ app.use((req, res, next) => {
   res.status(404).send({ status: 404, error: 'Not found' });
 });
 
+
+
 // catch errors
 app.use((err, req, res, next) => {
   const status = err.status || 500;

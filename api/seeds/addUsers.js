@@ -17,7 +17,6 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       const users = Array(18).fill(null).map(() => getFakeUser())
-      console.log(users)
       return knex('users').insert(users);
     });
 };

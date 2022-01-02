@@ -6,9 +6,9 @@ exports.up = function(knex) {
         table.date('birth_date', 250).notNullable();
         table.string('email', 500).notNullable();
         table.string('password', 500).notNullable();
-        table.string('phone', 500).notNullable();
+        table.string('phone', 500);
         table.string('identity', 500).notNullable();
-        table.string('passport_number', 500).notNullable();
+        table.string('passport_number', 500);
 
         table.timestamps();
     }).then(console.log('created user table'));
