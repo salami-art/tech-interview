@@ -15,9 +15,9 @@ paths:
           description: redirect to the UI page
   /users:
     get:
-      summary: List the available tasks
+      summary: List the available users
       description: |
-        The list of tasks can be filtered by their status.
+        The list of users can be filtered by their status.
       operationId: listUsers
       responses:
         '200':

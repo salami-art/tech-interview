@@ -5,7 +5,7 @@ const router = new express.Router();
 
 
 /**
- * The list of tasks can be filtered by their status.
+ * The list of users can be filtered by their status.
  * 
  */
 router.get('/', async (req, res, next) => {
